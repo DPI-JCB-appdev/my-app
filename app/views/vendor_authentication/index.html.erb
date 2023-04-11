@@ -1,0 +1,39 @@
+<div>
+  <div>
+    <h1>
+      List of all vendors
+    </h1>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          Name
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_vendors.each do |a_vendors| %>
+      <tr>
+        <td>
+          <%= a_vendors.name %>
+        </td>
+
+        <td>
+          <a href="/vendors/<%= a_vendors.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

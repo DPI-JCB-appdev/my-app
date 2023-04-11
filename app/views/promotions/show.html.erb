@@ -1,0 +1,133 @@
+<div>
+  <div>
+    <h1>
+      Promotion #<%= @the_promotion.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/promotions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_promotion/<%= @the_promotion.id %>">
+          Delete promotion
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Ended at
+      </dt>
+      <dd>
+        <%= @the_promotion.ended_at %>
+      </dd>
+
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_promotion.title %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_promotion.description %>
+      </dd>
+
+      <dt>
+        Vendor
+      </dt>
+      <dd>
+        <%= @the_promotion.vendor_id %>
+      </dd>
+
+      <dt>
+        Started at
+      </dt>
+      <dd>
+        <%= @the_promotion.started_at %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_promotion.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_promotion.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit promotion
+    </h2>
+
+    <form action="/modify_promotion/<%= @the_promotion.id %>"  method="post" >
+      <div>
+        <label for="ended_at_box">
+          Ended at
+        </label>
+
+        <input type="datetime-local" id="ended_at_box" name="query_ended_at"
+         value="<%= @the_promotion.ended_at %>">
+      </div>
+
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_promotion.title %>">
+      </div>
+
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <textarea id="description_box" name="query_description"><%= @the_promotion.description %></textarea>
+      </div>
+
+      <div>
+        <label for="vendor_id_box">
+          Vendor
+        </label>
+
+        <input type="text" id="vendor_id_box" name="query_vendor_id" value="<%= @the_promotion.vendor_id %>">
+      </div>
+
+      <div>
+        <label for="started_at_box">
+          Started at
+        </label>
+
+        <input type="datetime-local" id="started_at_box" name="query_started_at"
+         value="<%= @the_promotion.started_at %>">
+      </div>
+
+      <button>
+        Update promotion
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
