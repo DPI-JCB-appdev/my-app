@@ -1,7 +1,8 @@
+<% if @current_user.present? %>
 <div>
   <div>
     <h1>
-      Vendor #<%= @the_vendor.id %> details
+      <%= @the_vendor.name%>
     </h1>
 
     <div>
@@ -10,123 +11,87 @@
           Go back
         </a>
       </div>
-
+<!--
       <div>
         <a href="/delete_vendor/<%= @the_vendor.id %>">
           Delete vendor
         </a>
       </div>
     </div>
+    -->
 
     <dl>
       <dt>
-        Vendor
+       About
       </dt>
       <dd>
         <%= @the_vendor.name %>
       </dd>
 
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_vendor.title %>
-      </dd>
+    </div>
 
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_vendor.description %>
-      </dd>
+    <hr>
 
-      <dt>
-        Started at
-      </dt>
-      <dd>
-        <%= @the_vendor.started_at %>
-      </dd>
-
-      <dt>
-        Ended at
-      </dt>
-      <dd>
-        <%= @the_vendor.ended_at %>
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_vendor.updated_at) %> ago
-      </dd>
-
-      <dt>
-      </dt>
-      <dd>
-        <% time_ago_in_words(@the_vendor.created_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit vendor
-    </h2>
-
-    <form action="/modify_vendor/<%= @the_vendor.id %>"  method="post" >
+    <div>
       <div>
-        <label for="ended_at_box">
-          Ended at
-        </label>
+      <table border="1">
+        <tr>
 
-        <input type="datetime-local" id="ended_at_box" name="query_ended_at"
-         value="<%= @the_vendor.ended_at %>">
+          <th>
+            Vendor Name
+          </th>
+
+          <th>
+            Promotion Title
+          </th>
+
+          <th>
+            Description
+          </th>
+
+          <th>
+            Started at
+          </th>
+
+          <th>
+            Ended at
+          </th>
+
+          <th>
+          </th>
+        </tr>
+
+        <% Promotion.where({ :vendor_id => @the_vendor.id}).each do |vend| %>
+          <tr>
+
+            <td>
+              <%= @the_vendor.name%>
+            </td>
+
+            <td>
+              <%= vend.title %>
+            </td>
+
+            <td>
+              <%= vend.description %>
+            </td>
+
+            <td>
+              Starts <%= vend.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </td>
+
+            <td>
+              Ends <%= vend.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </td>
+
+            <td>
+              <a href="/promotions/<%= vend.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
       </div>
-
-      <div>
-        <label for="title_box">
-          Title
-        </label>
-
-        <input type="text" id="title_box" name="query_title" value="<%= @the_vendor.title %>">
-      </div>
-
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <textarea id="description_box" name="query_description"><%= @the_vendor.description %></textarea>
-      </div>
-
-      <div>
-        <label for="vendor_id_box">
-          Vendor
-        </label>
-
-        <input type="text" id="vendor_id_box" name="query_vendor_id" value="<%= @the_vendor.vendor_id %>">
-      </div>
-
-      <div>
-        <label for="started_at_box">
-          Started at
-        </label>
-
-        <input type="datetime-local" id="started_at_box" name="query_started_at"
-         value="<%= @the_vendor.started_at %>">
-      </div>
-
-      <button>
-        Update vendor
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
+    </div>
+<%end%>
+    <hr>

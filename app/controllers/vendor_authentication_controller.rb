@@ -37,7 +37,7 @@ class VendorAuthenticationController < ApplicationController
       else
         session[:vendor_id] = vendor.id
       
-        redirect_to("/", { :notice => "Signed in successfully." })
+        redirect_to("/vendors", { :notice => "Signed in successfully." })
       end
     else
       redirect_to("/vendor_sign_in", { :alert => "No vendor with that email address." })
@@ -47,7 +47,7 @@ class VendorAuthenticationController < ApplicationController
   def destroy_cookies
     reset_session
 
-    redirect_to("/", { :notice => "Signed out successfully." })
+    redirect_to("/vendor_sign_in", { :notice => "Signed out successfully." })
   end
 
   def sign_up_form

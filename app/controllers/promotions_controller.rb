@@ -1,4 +1,10 @@
 class PromotionsController < ApplicationController
+
+  def home
+    
+    render({ :template => "promotions/home.html.erb" })
+  end
+
   def index
     matching_promotions = Promotion.all
 

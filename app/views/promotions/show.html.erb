@@ -1,3 +1,60 @@
+<% if @current_user == nil || @current_user.present? %>
+
+<div>
+  <div>
+
+    <h1>
+      <%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %> Promotion
+    </h1>
+
+    <h2>
+      About This Deal
+    </h2>
+
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_promotion.title %>
+      </dd>
+
+      <dt>
+        Description
+      </dt>
+      <dd>
+        <%= @the_promotion.description %>
+      </dd>
+
+      <dt>
+        Started at
+      </dt>
+      <dd>
+        <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+      </dd>
+
+    <dl>
+      <dt>
+        Ended at
+      </dt>
+      <dd>
+        <%= @the_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+      </dd>
+
+    </dl>
+  </div>
+</div>
+
+  <div>
+    <div>
+      <a href="/promotions">
+        Go back
+      </a>
+    </div>
+<%end%>
+<hr>
+
+##
+<% if @current_vendor.present? %>
 <div>
   <div>
     <h1>
@@ -12,7 +69,7 @@
       </div>
 
       <div>
-        <a href="/delete_promotion/<%= @the_promotion.id %>">
+        <a href="/delete_promoion/<%= @the_promotion.id %>">
           Delete promotion
         </a>
       </div>
@@ -73,7 +130,6 @@
 
 <hr>
 
-
 <div>
   <div>
     <h2>
@@ -129,5 +185,5 @@
     </form>
   </div>
 </div>
-
+<%end%>
 <hr>

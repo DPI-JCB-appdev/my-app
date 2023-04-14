@@ -1,3 +1,79 @@
+<% if @current_user == nil && @current_vendor == nil %>
+  <div>
+    <div>
+      <h1>
+        List of all promotions
+      </h1>
+    </div>
+  </div>
+
+  <hr>
+
+  <div>
+    <div>
+      <table border="1">
+        <tr>
+
+          <th>
+            Vendor Name
+          </th>
+
+          <th>
+            Promotion Title
+          </th>
+
+          <th>
+            Description
+          </th>
+
+          <th>
+            Started at
+          </th>
+
+          <th>
+            Ended at
+          </th>
+
+          <th>
+          </th>
+        </tr>
+
+        <% @list_of_promotions.each do |a_promotion| %>
+          <tr>
+
+            <td>
+              <%= Vendor.where({ :id => a_promotion.vendor_id}).first.name%>
+            </td>
+
+            <td>
+              <%= a_promotion.title %>
+            </td>
+
+            <td>
+              <%= a_promotion.description %>
+            </td>
+
+            <td>
+              Starts <%= a_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </td>
+
+            <td>
+              Ends <%= a_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </td>
+
+            <td>
+              <a href="/promotions/<%= a_promotion.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <hr>
+<%end%>
+
 <% if @current_user.present? %>
   <div>
     <div>
@@ -11,67 +87,15 @@
 
   <div>
     <div>
-      <h2>
-        Add a new promotion
-      </h2>
-
-      <form action="/insert_promotion" method="post">
-        <div>
-          <label for="title_box">
-            Title
-          </label>
-          <input type="text" id="title_box" name="query_title">
-        </div>
-
-        <div>
-          <label for="started_at_box">
-            Started at
-          </label>
-          <input type="datetime-local" id="started_at_box" name="query_started_at">
-        </div>
-
-        <div>
-          <label for="ended_at_box">
-            Ended at
-          </label>
-          <input type="datetime-local" id="ended_at_box" name="query_ended_at">
-        </div>
-
-        <div>
-          <label for="description_box">
-            Description
-          </label>
-          <textarea id="description_box" name="query_description" rows="3"></textarea>
-        </div>
-
-        <div>
-          <label for="vendor_id_box">
-          </label>
-          <input type="hidden" id="vendor_id_box" name="query_vendor_id" value="<%= @current_vendor.name%>">
-        </div>
-
-        <button>
-          Create promotion
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <hr>
-  <div>
-    <div>
       <table border="1">
         <tr>
+
           <th>
-            ID
+            Vendor Name
           </th>
 
           <th>
-            Ended at
-          </th>
-
-          <th>
-            Title
+            Promotion Title
           </th>
 
           <th>
@@ -79,15 +103,11 @@
           </th>
 
           <th>
-            Vendor
-          </th>
-
-          <th>
             Started at
           </th>
 
           <th>
-            Created at
+            Ended at
           </th>
 
           <th>
@@ -100,12 +120,9 @@
 
         <% @list_of_promotions.each do |a_promotion| %>
           <tr>
-            <td>
-              <%= a_promotion.id %>
-            </td>
 
             <td>
-              <%= a_promotion.ended_at %>
+              <%= Vendor.where({ :id => a_promotion.vendor_id}).first.name%>
             </td>
 
             <td>
@@ -117,16 +134,13 @@
             </td>
 
             <td>
-              <%= a_promotion.vendor_id %>
+              <%= a_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
             </td>
 
             <td>
-              <%= a_promotion.started_at %>
+              <%= a_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
             </td>
 
-            <td>
-              <%= time_ago_in_words(a_promotion.created_at) %> ago
-            </td>
             <td>
               <%= time_ago_in_words(a_promotion.updated_at) %> ago
             </td>
@@ -145,7 +159,7 @@
 <%end%>
 
 <% if @current_vendor.present? %>
- <div>
+  <div>
     <div>
       <h1>
         List of <%= @current_vendor.name%> promotions
@@ -173,14 +187,15 @@
           <label for="started_at_box">
             Started at
           </label>
-          <input type="datetime-local" id="started_at_box" name="query_started_at">
+          <% started_at = Time.new(Time.now.year, Time.now.month, Time.now.day, 0, 0, 0) %>
+          <input type="datetime-local" id="started_at_box" name="query_started_at" value="<%= started_at.strftime('%Y-%m-%dT00:00') %>">
         </div>
 
         <div>
           <label for="ended_at_box">
             Ended at
           </label>
-          <input type="datetime-local" id="ended_at_box" name="query_ended_at">
+          <input type="datetime-local" id="ended_at_box" name="query_ended_at" value="<%= started_at.strftime('%Y-%m-%dT23:59') %>">
         </div>
 
         <div>
@@ -245,43 +260,43 @@
         </tr>
 
         <% @list_of_promotions.each do |a_promotion| %>
-          <tr>    
-          <% if @current_vendor.id == a_promotion.vendor_id %>
-            <td>
-              <%= Vendor.where({ :id => a_promotion.vendor_id}).first.name%>
-            </td>
-            <td>
-              <%= a_promotion.id %>
-            </td>
+          <tr>
+            <% if @current_vendor.id == a_promotion.vendor_id %>
+              <td>
+                <%= Vendor.where({ :id => a_promotion.vendor_id}).first.name%>
+              </td>
+              <td>
+                <%= a_promotion.id %>
+              </td>
 
-            <td>
-              <%= a_promotion.title %>
-            </td>
+              <td>
+                <%= a_promotion.title %>
+              </td>
 
-            <td>
-              <%= a_promotion.description %>
-            </td>
+              <td>
+                <%= a_promotion.description %>
+              </td>
 
-            <td>
-              <%= a_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
-            </td>
+              <td>
+                <%= a_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+              </td>
 
-            <td>
-              <%= a_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
-            </td>
+              <td>
+                <%= a_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+              </td>
 
-            <td>
-              <%= time_ago_in_words(a_promotion.created_at) %> ago
-            </td>
-            <td>
-              <%= time_ago_in_words(a_promotion.updated_at) %> ago
-            </td>
+              <td>
+                <%= time_ago_in_words(a_promotion.created_at) %> ago
+              </td>
+              <td>
+                <%= time_ago_in_words(a_promotion.updated_at) %> ago
+              </td>
 
-            <td>
-              <a href="/promotions/<%= a_promotion.id %>">
-                Show details
-              </a>
-            </td>
+              <td>
+                <a href="/promotions/<%= a_promotion.id %>">
+                  Show details
+                </a>
+              </td>
             <%end%>
           </tr>
         <% end %>
