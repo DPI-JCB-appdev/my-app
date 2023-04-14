@@ -12,6 +12,8 @@
 #  vendor_id   :integer
 #
 class Promotion < ApplicationRecord
+  validates :started_at, :presence => true
+  validates :ended_at, :presence => true
   has_many(:bookmarks, { :class_name => "Bookmark", :foreign_key => "promotion_id", :dependent => :destroy })
   belongs_to(:vendor, { :required => true, :class_name => "Vendor", :foreign_key => "vendor_id" })
 end
