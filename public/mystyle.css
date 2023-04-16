@@ -9,15 +9,49 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+
+.body{
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: left;
+	color: white;
+	background-color: #004643;
+	font-family: 'Montserrat', sans-serif;
+}
+
 html {
 	font-size: 10px;
 	font-family: 'Montserrat', sans-serif;
 	scroll-behavior: smooth;
 }
+
+body{
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #212529;
+	text-align: left;
+	color: white;
+	background-color: #004643;
+	font-family: 'Montserrat', sans-serif;
+}
+
+label,input,button,h5{
+	font-size: 2rem;
+}
+
 .index-promo{
 	color: white;
 	background-color: #004643;
 	font-family: 'Montserrat', sans-serif;
+}
+
+.h1, h1{
+	font-size: 4rem;
 }
 
 a {
@@ -34,6 +68,11 @@ img {
 	height: 100%;
 	width: 100%;
 	object-fit: cover;
+}
+.show-promo{
+	color: white;
+	background-color: #004643;
+	font-family: 'Montserrat', sans-serif;
 }
 .content-table {
 	border-collapse: collapse;
@@ -71,10 +110,29 @@ border-bottom: 1px solid lightslategray;
 	border-bottom: 2px solid lightslategray;
 	}
 
-	.content-table tbody td.active-row{
-		font-weight: bold;
-		color: #f9bc60;
-		}
+.content-table tbody td.active-row{
+	font-weight: bold;
+	color: #f9bc60;
+	}
+
+.content-table tbody td.active-row2{
+	font-weight: bold;
+	color: #ff4949;
+	}
+
+.content-table span{
+	font-weight: bold;
+	color: #ff4949;
+	}
+
+.content-table a{
+	font-weight: bold;
+	color: #aaff00;
+	}
+
+.comp-name{
+	color: crimson;
+}
 
 p {
 	color: black;
@@ -84,6 +142,8 @@ p {
 	font-weight: 300;
 	letter-spacing: 0.05rem;
 }
+
+h1
 .section-title {
 	font-size: 4rem;
 	font-weight: 300;

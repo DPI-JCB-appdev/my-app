@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all bookmarks
+      List of all your bookmarks
     </h1>
   </div>
 </div>
@@ -17,15 +17,14 @@
     <form action="/insert_bookmark" method="post">
       <div>
         <label for="user_id_box">
-          User
         </label>
 
-        <input type="text" id="user_id_box" name="query_user_id">
+        <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @current_user.id %>">
       </div>
 
       <div>
         <label for="promotion_id_box">
-          Promotion
+          Promotion ID
         </label>
 
         <input type="text" id="promotion_id_box" name="query_promotion_id">
@@ -41,26 +40,26 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="content-table" border="1">
       <tr>
         <th>
-          ID
+          Vendor Name
         </th>
 
         <th>
-          User
+          Promotion Title
         </th>
 
         <th>
-          Promotion
+          Promotion ID
         </th>
 
         <th>
-          Created at
+          Started At
         </th>
 
         <th>
-          Updated at
+          Redeem By
         </th>
 
         <th>
@@ -68,32 +67,33 @@
       </tr>
 
       <% @list_of_bookmarks.each do |a_bookmark| %>
-      <tr>
-        <td>
-          <%= a_bookmark.id %>
-        </td>
+        <tr>
 
-        <td>
-          <%= a_bookmark.user_id %>
-        </td>
+          <td>
+            <%= Vendor.where({ :id => Promotion.where({ :id => a_bookmark.promotion_id}).first.vendor_id}).first.name %>
+          </td>
 
-        <td>
-          <%= a_bookmark.promotion_id %>
-        </td>
+          <td>
+            <%= Promotion.where({ :id => a_bookmark.promotion_id}).first.title %>
+          </td>
 
-        <td>
-          <%= time_ago_in_words(a_bookmark.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_bookmark.updated_at) %> ago
-        </td>
+          <td>
+            <%= Promotion.where({ :id => a_bookmark.promotion_id}).first.id %>
+          </td>
 
-        <td>
-          <a href="/bookmarks/<%= a_bookmark.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          <td>
+            <%= Promotion.where({ :id => a_bookmark.promotion_id}).first.started_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+          </td>
+          <td>
+            <%= Promotion.where({ :id => a_bookmark.promotion_id}).first.ended_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+          </td>
+
+          <td>
+            <a href="/bookmarks/<%= a_bookmark.id %>">
+              Show details
+            </a>
+          </td>
+        </tr>
       <% end %>
     </table>
   </div>

@@ -20,40 +20,51 @@
 
     <dl>
       <dt>
-        User
+        Vendor Name
       </dt>
       <dd>
-        <%= @the_bookmark.user_id %>
+        <%= Vendor.where({ :id => Promotion.where({ :id => @the_bookmark.promotion_id})}).first.name %>
       </dd>
 
       <dt>
-        Promotion
+        Promotion Description
+      </dt>
+      <dd>
+        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.description %>
+      </dd>
+
+      <dt>
+        Promotion Title
+      </dt>
+      <dd>
+        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.title %> ago
+      </dd>
+
+      <dt>
+        Promotion ID
       </dt>
       <dd>
         <%= @the_bookmark.promotion_id %>
       </dd>
 
       <dt>
-        Created at
+        Started At
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_bookmark.created_at) %> ago
+        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.started_at.to_time.strftime('%B %e at %l:%M %p') %> ago
       </dd>
 
       <dt>
-        Updated at
+        Ends At
       </dt>
       <dd>
-        <%= time_ago_in_words(@the_bookmark.updated_at) %> ago
+        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.ended_at.to_time.strftime('%B %e at %l:%M %p') %> ago
       </dd>
     </dl>
   </div>
 </div>
 
-<hr>
-
-
-<div>
+<!-- <div>
   <div>
     <h2>
       Edit bookmark
@@ -81,6 +92,6 @@
       </button>
     </form>
   </div>
-</div>
+</div> -->
 
 <hr>

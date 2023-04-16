@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mystyle.css">
+
     <title>Promo Index</title>
   </head>
 
-  <body class="index-promo">
+  <body class="index-promo-show">
 
     <% if @current_user == nil && @current_vendor == nil %>
       <div>
@@ -123,6 +124,13 @@
               </th>
 
               <th>
+              Promotional Details
+              </th>
+
+              <th>
+                <h2>
+                  Bookmark <span>Deal!</span>
+                </h2>
               </th>
             </tr>
 
@@ -141,11 +149,11 @@
                   <%= a_promotion.description %>
                 </td>
 
-                <td>
+                <td class="active-row">
                   <%= a_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
                 </td>
 
-                <td>
+                <td class="active-row2">
                   <%= a_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
                 </td>
 
@@ -156,6 +164,32 @@
                 <td>
                   <a href="/promotions/<%= a_promotion.id %>">
                     Show details
+                  </a>
+                </td>
+
+                <td>
+  <div>
+    <form action="/insert_bookmark" method="post">
+      <div>
+        <label for="user_id_box">
+        </label>
+
+        <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @current_user.id %>">
+      </div>
+
+      <div>
+        <label for="promotion_id_box">
+        </label>
+
+        <input type="hidden" id="promotion_id_box" name="query_promotion_id" value="                  <%= a_promotion.id %>">
+      </div>
+
+      <button>
+        Bookmark
+      </button>
+    </form>
+  </div>
+</div>
                   </a>
                 </td>
               </tr>

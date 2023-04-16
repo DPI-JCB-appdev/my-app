@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mystyle.css">
+
     <title>Promo Details</title>
   </head>
 
   <body class="index-promo">
-
     <% if @current_user == nil || @current_user.present? %>
 
       <div>
         <div>
 
           <h1>
-            <%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %> Promotion
+            <span><%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %></span> Promotion
           </h1>
 
           <h2>
@@ -62,10 +62,10 @@
             Go back
           </a>
         </div>
+      <div>
       <%end%>
       <hr>
 
-      ##
       <% if @current_vendor.present? %>
         <div>
           <div>
@@ -199,5 +199,6 @@
         </div>
       <%end%>
       <hr>
+
     </body>
   </html>
