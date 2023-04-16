@@ -1,189 +1,203 @@
-<% if @current_user == nil || @current_user.present? %>
+<!DOCTYPE html>
+<html lang="en">
 
-<div>
-  <div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mystyle.css">
+    <title>Promo Details</title>
+  </head>
 
-    <h1>
-      <%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %> Promotion
-    </h1>
+  <body class="index-promo">
 
-    <h2>
-      About This Deal
-    </h2>
+    <% if @current_user == nil || @current_user.present? %>
 
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_promotion.title %>
-      </dd>
-
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_promotion.description %>
-      </dd>
-
-      <dt>
-        Started at
-      </dt>
-      <dd>
-        <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
-      </dd>
-
-    <dl>
-      <dt>
-        Ended at
-      </dt>
-      <dd>
-        <%= @the_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
-      </dd>
-
-    </dl>
-  </div>
-</div>
-
-  <div>
-    <div>
-      <a href="/promotions">
-        Go back
-      </a>
-    </div>
-<%end%>
-<hr>
-
-##
-<% if @current_vendor.present? %>
-<div>
-  <div>
-    <h1>
-      Promotion #<%= @the_promotion.id %> details
-    </h1>
-
-    <div>
       <div>
-        <a href="/promotions">
-          Go back
-        </a>
+        <div>
+
+          <h1>
+            <%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %> Promotion
+          </h1>
+
+          <h2>
+            About This Deal
+          </h2>
+
+          <dt>
+            Title
+          </dt>
+          <dd>
+            <%= @the_promotion.title %>
+          </dd>
+
+          <dt>
+            Description
+          </dt>
+          <dd>
+            <%= @the_promotion.description %>
+          </dd>
+
+          <dt>
+            Started at
+          </dt>
+          <dd>
+            <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+          </dd>
+
+          <dl>
+            <dt>
+              Ended at
+            </dt>
+            <dd>
+              <%= @the_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </dd>
+
+          </dl>
+        </div>
       </div>
 
       <div>
-        <a href="/delete_promoion/<%= @the_promotion.id %>">
-          Delete promotion
-        </a>
-      </div>
-    </div>
+        <div>
+          <a href="/promotions">
+            Go back
+          </a>
+        </div>
+      <%end%>
+      <hr>
 
-    <dl>
-      <dt>
-        Ended at
-      </dt>
-      <dd>
-        <%= @the_promotion.ended_at %>
-      </dd>
+      ##
+      <% if @current_vendor.present? %>
+        <div>
+          <div>
+            <h1>
+              Promotion #<%= @the_promotion.id %> details
+            </h1>
 
-      <dt>
-        Title
-      </dt>
-      <dd>
-        <%= @the_promotion.title %>
-      </dd>
+            <div>
+              <div>
+                <a href="/promotions">
+                  Go back
+                </a>
+              </div>
 
-      <dt>
-        Description
-      </dt>
-      <dd>
-        <%= @the_promotion.description %>
-      </dd>
+              <div>
+                <a href="/delete_promoion/<%= @the_promotion.id %>">
+                  Delete promotion
+                </a>
+              </div>
+            </div>
 
-      <dt>
-        Vendor
-      </dt>
-      <dd>
-        <%= @the_promotion.vendor_id %>
-      </dd>
+            <dl>
+              <dt>
+                Ended at
+              </dt>
+              <dd>
+                <%= @the_promotion.ended_at %>
+              </dd>
 
-      <dt>
-        Started at
-      </dt>
-      <dd>
-        <%= @the_promotion.started_at %>
-      </dd>
+              <dt>
+                Title
+              </dt>
+              <dd>
+                <%= @the_promotion.title %>
+              </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_promotion.created_at) %> ago
-      </dd>
+              <dt>
+                Description
+              </dt>
+              <dd>
+                <%= @the_promotion.description %>
+              </dd>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_promotion.updated_at) %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
+              <dt>
+                Vendor
+              </dt>
+              <dd>
+                <%= @the_promotion.vendor_id %>
+              </dd>
 
-<hr>
+              <dt>
+                Started at
+              </dt>
+              <dd>
+                <%= @the_promotion.started_at %>
+              </dd>
 
-<div>
-  <div>
-    <h2>
-      Edit promotion
-    </h2>
+              <dt>
+                Created at
+              </dt>
+              <dd>
+                <%= time_ago_in_words(@the_promotion.created_at) %> ago
+              </dd>
 
-    <form action="/modify_promotion/<%= @the_promotion.id %>"  method="post" >
-      <div>
-        <label for="ended_at_box">
-          Ended at
-        </label>
+              <dt>
+                Updated at
+              </dt>
+              <dd>
+                <%= time_ago_in_words(@the_promotion.updated_at) %> ago
+              </dd>
+            </dl>
+          </div>
+        </div>
 
-        <input type="datetime-local" id="ended_at_box" name="query_ended_at"
+        <hr>
+
+        <div>
+          <div>
+            <h2>
+              Edit promotion
+            </h2>
+
+            <form action="/modify_promotion/<%= @the_promotion.id %>"  method="post" >
+              <div>
+                <label for="ended_at_box">
+                  Ended at
+                </label>
+
+                <input type="datetime-local" id="ended_at_box" name="query_ended_at"
          value="<%= @the_promotion.ended_at %>">
-      </div>
+              </div>
 
-      <div>
-        <label for="title_box">
-          Title
-        </label>
+              <div>
+                <label for="title_box">
+                  Title
+                </label>
 
-        <input type="text" id="title_box" name="query_title" value="<%= @the_promotion.title %>">
-      </div>
+                <input type="text" id="title_box" name="query_title" value="<%= @the_promotion.title %>">
+              </div>
 
-      <div>
-        <label for="description_box">
-          Description
-        </label>
+              <div>
+                <label for="description_box">
+                  Description
+                </label>
 
-        <textarea id="description_box" name="query_description"><%= @the_promotion.description %></textarea>
-      </div>
+                <textarea id="description_box" name="query_description"><%= @the_promotion.description %></textarea>
+              </div>
 
-      <div>
-        <label for="vendor_id_box">
-          Vendor
-        </label>
+              <div>
+                <label for="vendor_id_box">
+                  Vendor
+                </label>
 
-        <input type="text" id="vendor_id_box" name="query_vendor_id" value="<%= @the_promotion.vendor_id %>">
-      </div>
+                <input type="text" id="vendor_id_box" name="query_vendor_id" value="<%= @the_promotion.vendor_id %>">
+              </div>
 
-      <div>
-        <label for="started_at_box">
-          Started at
-        </label>
+              <div>
+                <label for="started_at_box">
+                  Started at
+                </label>
 
-        <input type="datetime-local" id="started_at_box" name="query_started_at"
+                <input type="datetime-local" id="started_at_box" name="query_started_at"
          value="<%= @the_promotion.started_at %>">
-      </div>
+              </div>
 
-      <button>
-        Update promotion
-      </button>
-    </form>
-  </div>
-</div>
-<%end%>
-<hr>
+              <button>
+                Update promotion
+              </button>
+            </form>
+          </div>
+        </div>
+      <%end%>
+      <hr>
+    </body>
+  </html>

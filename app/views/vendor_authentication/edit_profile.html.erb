@@ -9,9 +9,15 @@
         <label for="email_box">Email</label>
         <input id="email_box" name="query_email" value="<%= @current_vendor.email %>">
       </div>
+
       <div>
         <label for="name_box">Name</label>
         <input id="name_box" name="query_name" value="<%= @current_vendor.name %>">
+      </div>
+
+      <div>
+        <label for="about_box">About</label>
+        <textarea id="about_box" name="query_about" rows=6 ><%= @current_vendor.about %></textarea>
       </div>
 
       <div>

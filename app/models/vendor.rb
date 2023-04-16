@@ -3,6 +3,7 @@
 # Table name: vendors
 #
 #  id              :integer          not null, primary key
+#  about           :string
 #  email           :string
 #  name            :string
 #  password_digest :string

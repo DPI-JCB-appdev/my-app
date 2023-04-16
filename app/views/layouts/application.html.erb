@@ -12,18 +12,21 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href=/workspace/my-app/public/mystyle.css>
- 
+    <link rel="stylesheet" href=/public/mystyle.css>
+
   </head>
 
   <body>
 
-    <nav class ="navbar navbar-expand-md navbar-light bg-success p-2 text-white bg-opacity-75"">
-     <div class ="container-fluid">
-        <a href="/" class="navbar-brand"> Deallio</a>
+    <nav class ="navbar navbar-expand-md navbar-dark bg-success p-2 text-white bg-opacity-75">
+      <div class ="container-fluid">
+        <a href="/" class="brand">
+          <h1>De<span>A</span>ll<span>I</span>o</h1>
+        </a>
+
         <button
         class="navbar-toggler"
         type="button"
@@ -35,23 +38,23 @@
       >
           <span class="navbar-toggler-icon"></span>
         </button>
-       
+
         <div class="collapse navbar-collapse" id="toggleMobileMenu">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
             <li class="nav-item">
-             <a class="nav-link" href="/promotions"> Promotions</a>
+              <a class="nav-link" href="/promotions"> Promotions</a>
             </li>
 
             <% if @current_user.present? %>
-            <li class="nav-item">
-              <a class="nav-link" href="/vendors"> Vendors </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="edit_user_profile"> <%= @current_user.username%> </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/user_sign_out">Sign out</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/vendors"> Vendors </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="edit_user_profile"> <%= @current_user.username%> </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/user_sign_out">Sign out</a>
+              </li>
             <% elsif @current_vendor.present? %>
               <li class="nav-item">
                 <a class="nav-link" href="edit_vendor_profile"> <%= @current_vendor.name%> </a>
@@ -60,36 +63,36 @@
                 <a class="nav-link" href="/vendor_sign_out">Sign out</a>
               </li>
             <% else %>
-            <li>          
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> User</a>
-                <ul class="dropdown-menu">
-                  <li><a href="/user_sign_in" class="dropdown-item"> User Sign in</a> </li>
-                  <li><a href="/user_sign_up" class="dropdown-item"> User Sign up</a> </li>
-                </ul>
-              </li>
+              <li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> Vendor</a>
-                    <ul class="dropdown-menu">
-                      <li><a href="/vendor_sign_in" class="dropdown-item"> Vendor Sign in</a> </li>
-                      <li><a href="/vendor_sign_up" class="dropdown-item"> Vendor Sign up</a> </li>
-                </ul>
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> User</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/user_sign_in" class="dropdown-item"> User Sign in</a> </li>
+                    <li><a href="/user_sign_up" class="dropdown-item"> User Sign up</a> </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> Vendor</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/vendor_sign_in" class="dropdown-item"> Vendor Sign in</a> </li>
+                    <li><a href="/vendor_sign_up" class="dropdown-item"> Vendor Sign up</a> </li>
+                  </ul>
+                </li>
               </li>
-            </li>
-          <%end%>
-        </ul>
-      </nav>
+            <%end%>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
 
-  <% if notice.present?%>
-    <div class="notice"><%= notice %></div>
-  <%end%>
+    <% if notice.present?%>
+      <div class="notice"><%= notice %></div>
+    <%end%>
 
-  <% if alert.present?%>
-    <div class="alert"><%= alert %></div>
-  <%end%>
-  <body>
-    <%= yield %>
-  </body>
-</html>
+    <% if alert.present?%>
+      <div class="alert"><%= alert %></div>
+    <%end%>
+    <body>
+      <%= yield %>
+    </body>
+  </html>

@@ -1,39 +1,53 @@
-<div>
-  <div>
-    <h1>
-      List of all vendors
-    </h1>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
 
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          Name
-        </th>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mystyle.css">
+    <title>Promo Index</title>
+  </head>
 
-        <th>
-        </th>
-      </tr>
+  <body class="index-promo">
 
-      <% @list_of_vendors.each do |a_vendors| %>
-      <tr>
-        <td>
-          <%= a_vendors.name %>
-        </td>
+    <div>
+      <div>
+        <h1>
+          List of all vendors
+        </h1>
+      </div>
+    </div>
 
-        <td>
-          <a href="/vendors/<%= a_vendors.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+    <hr>
+    <div>
+      <div>
+        <table class="content-table" border="1">
+          <tr>
+            <th>
+              Name
+            </th>
 
-<hr>
+            <th>
+            </th>
+          </tr>
+
+          <% @list_of_vendors.each do |a_vendors| %>
+            <tr>
+              <td>
+                <%= a_vendors.name %>
+              </td>
+
+              <td>
+                <a href="/vendors/<%= a_vendors.id %>">
+                  Show details
+                </a>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+  </body>
+</html>

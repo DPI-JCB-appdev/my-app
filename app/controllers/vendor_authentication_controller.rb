@@ -37,7 +37,7 @@ class VendorAuthenticationController < ApplicationController
       else
         session[:vendor_id] = vendor.id
       
-        redirect_to("/vendors", { :notice => "Signed in successfully." })
+        redirect_to("/promotions", { :notice => "Signed in successfully." })
       end
     else
       redirect_to("/vendor_sign_in", { :alert => "No vendor with that email address." })
@@ -60,6 +60,7 @@ class VendorAuthenticationController < ApplicationController
     @vendor.password = params.fetch("query_password")
     @vendor.password_confirmation = params.fetch("query_password_confirmation")
     @vendor.name = params.fetch("query_name")
+    @vendor.about = params.fetch("query_about")
 
     save_status = @vendor.save
 
@@ -82,6 +83,7 @@ class VendorAuthenticationController < ApplicationController
     @vendor.password = params.fetch("query_password")
     @vendor.password_confirmation = params.fetch("query_password_confirmation")
     @vendor.name = params.fetch("query_name")
+    @vendor.about = params.fetch("query_about")
     
     if @vendor.valid?
       @vendor.save
