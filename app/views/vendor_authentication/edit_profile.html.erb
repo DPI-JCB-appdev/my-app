@@ -17,14 +17,14 @@
 
       <div>
         <label for="about_box">About</label>
-        <textarea id="about_box" name="query_about" rows=6 ><%= @current_vendor.about %></textarea>
+        <textarea id="about_box" name="query_about" rows=6 cols="50"><%= @current_vendor.about %></textarea>
       </div>
 
       <div>
         <label for="password_box">Password</label>
         <input id="password_box" name="query_password" placeholder="Choose a password..." type="password">
       </div>
-    
+
       <div>
         <label for="password_confirmation_box">Password Confirmation</label>
         <input id="password_confirmation_box" name="query_password_confirmation" placeholder="Confirm your password..." type="password">

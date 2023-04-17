@@ -10,6 +10,11 @@
 	box-sizing: border-box;
 }
 
+.nav-item{
+	color: white;
+	font-size: 2.5rem;
+}
+
 .body{
 	margin: 0;
 	font-size: 1rem;
@@ -42,6 +47,11 @@ body{
 
 label,input,button,h5{
 	font-size: 2rem;
+}
+
+textarea#about_box,#description_box{
+	font-size: 1.8em;
+	font-style: italic;
 }
 
 .index-promo{
@@ -118,6 +128,11 @@ border-bottom: 1px solid lightslategray;
 .content-table tbody td.active-row2{
 	font-weight: bold;
 	color: #ff4949;
+	}
+
+.content-table tbody td.active-row3{
+	font-weight: bold;
+	color: #51ff00;
 	}
 
 .content-table span{
