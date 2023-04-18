@@ -1,17 +1,29 @@
-    <% if @current_user.present? %>
-  <div>
-    <div>
-      <h1>
-        <%= @the_vendor.name%>
-      </h1>
+<!DOCTYPE html>
+<html lang="en">
 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mystyle.css">
+    <title>Promo Index</title>
+  </head>
+
+  <body class="index-promo">
+
+    <% if @current_user.present? %>
       <div>
         <div>
-          <a href="/vendors">
-            Go back
-          </a>
-        </div>
-        <!--
+          <h1>
+            <%= @the_vendor.name%>
+          </h1>
+
+          <div>
+            <div>
+              <a href="/vendors">
+                Go back
+              </a>
+            </div>
+            <!--
       <div>
         <a href="/delete_vendor/<%= @the_vendor.id %>">
           Delete vendor
@@ -20,78 +32,80 @@
     </div>
     -->
 
-        <dl>
-          <dt>
-            About
-          </dt>
-          <dd>
-            <%= @the_vendor.about %>
-          </dd>
+            <dl>
+              <dt class="active1">
+                About
+              </dt>
+              <dd>
+                <%= @the_vendor.about %>
+              </dd>
 
-        </div>
-
-        <hr>
-
-        <div>
-          <div>
-            <table class="content-table" border="1">
-              <tr>
-
-                <th>
-                  Vendor Name
-                </th>
-
-                <th>
-                  Promotion Title
-                </th>
-
-                <th>
-                  Description
-                </th>
-
-                <th>
-                  Started at
-                </th>
-
-                <th>
-                  Ended at
-                </th>
-
-                <th>
-                </th>
-              </tr>
-
-              <% Promotion.where({ :vendor_id => @the_vendor.id}).each do |vend| %>
-                <tr>
-
-                  <td>
-                    <%= @the_vendor.name%>
-                  </td>
-
-                  <td>
-                    <%= vend.title %>
-                  </td>
-
-                  <td>
-                    <%= vend.description %>
-                  </td>
-
-                  <td>
-                    Starts <%= vend.started_at.to_time.strftime('%B %e at %l:%M %p') %>
-                  </td>
-
-                  <td>
-                    Ends <%= vend.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
-                  </td>
-
-                  <td>
-                    <a href="/promotions/<%= vend.id %>">
-                      Show details
-                    </a>
-                  </td>
-                </tr>
-              <% end %>
             </div>
-          </div>
-        <%end%>
-        <hr>
+
+            <hr>
+
+            <div>
+              <div>
+                <table class="content-table" border="1">
+                  <tr>
+
+                    <th>
+                      Vendor Name
+                    </th>
+
+                    <th>
+                      Promotion Title
+                    </th>
+
+                    <th>
+                      Description
+                    </th>
+
+                    <th>
+                      Started at
+                    </th>
+
+                    <th>
+                      Ended at
+                    </th>
+
+                    <th>
+                    </th>
+                  </tr>
+
+                  <% Promotion.where({ :vendor_id => @the_vendor.id}).each do |vend| %>
+                    <tr>
+
+                      <td>
+                        <%= @the_vendor.name%>
+                      </td>
+
+                      <td class="active-row">
+                        <%= vend.title %>
+                      </td>
+
+                      <td>
+                        <%= vend.description %>
+                      </td>
+
+                      <td class="active-row">
+                        Starts <%= vend.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+                      </td>
+
+                      <td class="active-row2">
+                        Ends <%= vend.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+                      </td>
+
+                      <td>
+                        <a href="/promotions/<%= vend.id %>">
+                          Show details
+                        </a>
+                      </td>
+                    </tr>
+                  <% end %>
+                </div>
+              </div>
+            <%end%>
+            <hr>
+          </body>
+        </html>

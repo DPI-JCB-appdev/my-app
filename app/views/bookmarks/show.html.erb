@@ -1,68 +1,81 @@
-<div>
-  <div>
-    <h1>
-      Bookmark #<%= @the_bookmark.id %> details
-    </h1>
+<!DOCTYPE html>
+<html lang="en">
 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mystyle.css">
+
+    <title>Promo Index</title>
+  </head>
+
+  <body class="index-promo">
     <div>
       <div>
-        <a href="/bookmarks">
-          Go back
-        </a>
-      </div>
+        <h1>
+          Bookmark #<%= @the_bookmark.id %> details
+        </h1>
 
-      <div>
-        <a href="/delete_bookmark/<%= @the_bookmark.id %>">
-          Delete bookmark
-        </a>
+        <div>
+          <div>
+            <a href="/bookmarks">
+              Go Back
+            </a>
+          </div>
+
+          <dl>
+            <dt>
+              Vendor Name
+            </dt>
+            <dd>
+              <%= Vendor.where({ :id => Promotion.where({ :id => @the_bookmark.promotion_id}).first.vendor_id}).first.name %>
+            </dd>
+
+            <dt>
+              Promotion Description
+            </dt>
+            <dd>
+              <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.description %>
+            </dd>
+
+            <dt>
+              Promotion Title
+            </dt>
+            <dd>
+              <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.title %> ago
+            </dd>
+
+            <dt>
+              Promotional ID #
+            </dt>
+            <dd>
+              <%= @the_bookmark.promotion_id %>
+            </dd>
+
+            <dt>
+              Started At
+            </dt>
+            <dd>
+              <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.started_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+            </dd>
+
+            <dt>
+              Ends At
+            </dt>
+            <dd>
+              <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.ended_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+            </dd>
+          </dl>
+          <div>
+            <a href="/delete_bookmark/<%= @the_bookmark.id %>">
+              Delete bookmark
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-
-    <dl>
-      <dt>
-        Vendor Name
-      </dt>
-      <dd>
-        <%= Vendor.where({ :id => Promotion.where({ :id => @the_bookmark.promotion_id})}).first.name %>
-      </dd>
-
-      <dt>
-        Promotion Description
-      </dt>
-      <dd>
-        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.description %>
-      </dd>
-
-      <dt>
-        Promotion Title
-      </dt>
-      <dd>
-        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.title %> ago
-      </dd>
-
-      <dt>
-        Promotion ID
-      </dt>
-      <dd>
-        <%= @the_bookmark.promotion_id %>
-      </dd>
-
-      <dt>
-        Started At
-      </dt>
-      <dd>
-        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.started_at.to_time.strftime('%B %e at %l:%M %p') %> ago
-      </dd>
-
-      <dt>
-        Ends At
-      </dt>
-      <dd>
-        <%= Promotion.where({ :id => @the_bookmark.promotion_id}).first.ended_at.to_time.strftime('%B %e at %l:%M %p') %> ago
-      </dd>
-    </dl>
-  </div>
-</div>
+  </body>
+</html>
 
 <!-- <div>
   <div>

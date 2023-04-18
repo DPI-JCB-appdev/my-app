@@ -4,13 +4,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="mystyle.css">
+    <link rel="stylesheet" href="/mystyle.css">
 
     <title>Promo Details</title>
   </head>
 
   <body class="index-promo">
-    <% if @current_user == nil || @current_user.present? %>
+    <% if @current_user == nil && @current_vendor == nil %>
 
       <div>
         <div>
@@ -23,28 +23,28 @@
             About This Deal
           </h2>
 
-          <dt>
-            Title
-          </dt>
-          <dd>
-            <%= @the_promotion.title %>
-          </dd>
-
-          <dt>
-            Description
-          </dt>
-          <dd>
-            <%= @the_promotion.description %>
-          </dd>
-
-          <dt>
-            Started at
-          </dt>
-          <dd>
-            <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
-          </dd>
-
           <dl>
+            <dt class="active2">
+              Title
+            </dt>
+            <dd class="active2">
+              <%= @the_promotion.title %>
+            </dd>
+
+            <dt>
+              Description
+            </dt>
+            <dd>
+              <%= @the_promotion.description %>
+            </dd>
+
+            <dt>
+              Started at
+            </dt>
+            <dd>
+              <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+            </dd>
+
             <dt>
               Ended at
             </dt>
@@ -58,147 +58,217 @@
 
       <div>
         <div>
-          <a href="/promotions">
-            Go back
+          <a href="/vendors/<%= @the_promotion.vendor_id%>">
+            Go Back
           </a>
         </div>
-      <div>
-      <%end%>
-      <hr>
-
-      <% if @current_vendor.present? %>
         <div>
-          <div>
-            <h1>
-              Promotion #<%= @the_promotion.id %> details
-            </h1>
-
-            <div>
-              <div>
-                <a href="/promotions">
-                  Go back
-                </a>
-              </div>
-
-              <div>
-                <a href="/delete_promoion/<%= @the_promotion.id %>">
-                  Delete promotion
-                </a>
-              </div>
-            </div>
-
-            <dl>
-              <dt>
-                Ended at
-              </dt>
-              <dd>
-                <%= @the_promotion.ended_at %>
-              </dd>
-
-              <dt>
-                Title
-              </dt>
-              <dd>
-                <%= @the_promotion.title %>
-              </dd>
-
-              <dt>
-                Description
-              </dt>
-              <dd>
-                <%= @the_promotion.description %>
-              </dd>
-
-              <dt>
-                Vendor
-              </dt>
-              <dd>
-                <%= @the_promotion.vendor_id %>
-              </dd>
-
-              <dt>
-                Started at
-              </dt>
-              <dd>
-                <%= @the_promotion.started_at %>
-              </dd>
-
-              <dt>
-                Created at
-              </dt>
-              <dd>
-                <%= time_ago_in_words(@the_promotion.created_at) %> ago
-              </dd>
-
-              <dt>
-                Updated at
-              </dt>
-              <dd>
-                <%= time_ago_in_words(@the_promotion.updated_at) %> ago
-              </dd>
-            </dl>
-          </div>
-        </div>
-
+        <%end%>
         <hr>
 
-        <div>
+        <% if @current_user.present? %>
+
           <div>
-            <h2>
-              Edit promotion
-            </h2>
+            <div>
 
-            <form action="/modify_promotion/<%= @the_promotion.id %>"  method="post" >
-              <div>
-                <label for="ended_at_box">
-                  Ended at
-                </label>
+              <h1>
+                <span><%= Vendor.where({:id => @the_promotion.vendor_id}).first.name %></span> Promotion
+              </h1>
 
-                <input type="datetime-local" id="ended_at_box" name="query_ended_at"
-         value="<%= @the_promotion.ended_at %>">
-              </div>
+              <h2>
+                About This Deal
+              </h2>
 
-              <div>
-                <label for="title_box">
+              <dl>
+                <dt class="active2">
                   Title
-                </label>
+                </dt>
+                <dd class="active2">
+                  <%= @the_promotion.title %>
+                </dd>
 
-                <input type="text" id="title_box" name="query_title" value="<%= @the_promotion.title %>">
-              </div>
-
-              <div>
-                <label for="description_box">
+                <dt>
                   Description
-                </label>
+                </dt>
+                <dd>
+                  <%= @the_promotion.description %>
+                </dd>
 
-                <textarea id="description_box" name="query_description"><%= @the_promotion.description %></textarea>
-              </div>
-
-              <div>
-                <label for="vendor_id_box">
-                  Vendor
-                </label>
-
-                <input type="text" id="vendor_id_box" name="query_vendor_id" value="<%= @the_promotion.vendor_id %>">
-              </div>
-
-              <div>
-                <label for="started_at_box">
+                <dt>
                   Started at
-                </label>
+                </dt>
+                <dd>
+                  <%= @the_promotion.started_at.to_time.strftime('%B %e at %l %p') %>
+                </dd>
 
-                <input type="datetime-local" id="started_at_box" name="query_started_at"
-         value="<%= @the_promotion.started_at %>">
-              </div>
+                <dt>
+                  Ended at
+                </dt>
+                <dd>
+                  <%= @the_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+                </dd>
+                <form action="/insert_bookmark" method="post">
+                  <div>
+                    <label for="user_id_box">
+                    </label>
 
-              <button>
-                Update promotion
-              </button>
-            </form>
+                    <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @current_user.id %>">
+
+                    <label for="promotion_id_box">
+                    </label>
+
+                    <input type="hidden" id="promotion_id_box" name="query_promotion_id" value="<%= @the_promotion.id %>">
+                  </div>
+                  <button>
+                    Bookmark
+                  </button>
+                </form>
+              </dl>
+            </div>
           </div>
-        </div>
-      <%end%>
-      <hr>
 
-    </body>
-  </html>
+          <div>
+            <div>
+              <a href="/vendors/<%= @the_promotion.vendor_id%>">
+                <%=Vendor.where({ :id => @the_promotion.vendor_id}).first.name%> Promo Page
+              </a>
+            </div>
+            <div>
+
+              <div>
+                <div>
+                  <a href="/promotions">
+                    Back to Promo Page
+                  </a>
+                </div>
+                <div>
+                <%end%>
+
+                <% if @current_vendor.present? %>
+                  <div>
+                    <div>
+                      <h1>
+                        <%=Vendor.where({ :id => @the_promotion.vendor_id}).first.name%> Promotion #<%= @the_promotion.id %> Details
+                      </h1>
+
+                      <div>
+                        <div>
+                          <a href="/promotions">
+                            Go Back
+                          </a>
+                        </div>
+
+                        <dl>
+
+                          <dt>
+                            Title
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.title %>
+                          </dd>
+
+                          <dt>
+                            Description
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.description %>
+                          </dd>
+
+                          <dt>
+                            Started at
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.started_at.to_time.strftime('%B %e at %l:%M %p') %>
+                          </dd>
+
+                          <dt>
+                            Ended at
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.ended_at.to_time.strftime('%B %e at %l:%M %p') %>
+                          </dd>
+
+                          <dt>
+                            Created at
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.created_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+                          </dd>
+                        </dl>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div>
+                        <dl>
+                          <dt>
+                            Updated at
+                          </dt>
+                          <dd>
+                            <%= @the_promotion.updated_at.to_time.strftime('%B %e at %l:%M %p') %> ago
+                          </dd>
+                        </dl>
+                        <hr>
+                        <div>
+                          <a class="activered" href="/delete_promoion/<%= @the_promotion.id %>">
+                            Delete This Promotion
+                          </a>
+                        </div>
+                      </div>
+                      <h1>
+                        Edit promotion
+                      </h1>
+
+                      <form action="/modify_promotion/<%= @the_promotion.id %>"  method="post" >
+
+                        <div>
+                          <label for="title_box">
+                            Title
+                          </label>
+
+                          <input type="text" id="title_box" name="query_title" value="<%= @the_promotion.title %>">
+                        </div>
+
+                        <div>
+                          <label for="description_box">
+                            Description
+                          </label>
+
+                          <textarea id="description_box" name="query_description" rows=3 cols=50 ><%= @the_promotion.description %></textarea>
+                        </div>
+
+                        <div>
+                          <label for="vendor_id_box">
+                          </label>
+
+                          <input type="hidden" id="vendor_id_box" name="query_vendor_id" value="<%= @the_promotion.vendor_id %>">
+                        </div>
+
+                        <div>
+                          <label for="started_at_box">
+                            Started at
+                          </label>
+
+                          <input type="datetime-local" id="started_at_box" name="query_started_at"
+         value="<%= @the_promotion.started_at.to_i %>">
+                        </div>
+
+                        <div>
+                          <label for="ended_at_box">
+                            Ended at
+                          </label>
+
+                          <input type="datetime-local" id="ended_at_box" name="query_ended_at" value="<%= @the_promotion.ended_at %>">
+                        </div>
+
+                        <button>
+                          Update promotion
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                <%end%>
+                <hr>
+
+              </body>
+            </html>
