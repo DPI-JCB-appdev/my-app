@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Base Rails</title>
+    <title>Deallio</title>
     <%= csrf_meta_tags %>
 
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
@@ -20,82 +20,8 @@
   </head>
 
   <body>
-
-    <nav class ="navbar navbar-expand-md bg-success p-2 text-white bg-opacity-75">
-      <div class ="container-fluid">
-        <a href="/" class="brand">
-          <h1>De<span>A</span>ll<span>I</span>o</h1>
-        </a>
-
-        <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#toggleMobileMenu"
-        aria-controls="toggleMobileMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="toggleMobileMenu">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
-            <li class="nav-item">
-              <a class="nav-link" href="/promotions"> Promotions</a>
-            </li>
-
-            <% if @current_user.present? %>
-              <li class="nav-item">
-                <a class="nav-link" href="/vendors"> Vendors </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/bookmarks"> Bookmarks </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/edit_user_profile"> <%= @current_user.username%> </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/user_sign_out">Sign Out</a>
-              </li>
-            <% elsif @current_vendor.present? %>
-              <li class="nav-item">
-                <a class="nav-link" href="/edit_vendor_profile"> <%= @current_vendor.name%> </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/vendor_sign_out">Sign out</a>
-              </li>
-            <% else %>
-              <li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> User</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/user_sign_in" class="dropdown-item"> User Sign in</a> </li>
-                    <li><a href="/user_sign_up" class="dropdown-item"> User Sign up</a> </li>
-                  </ul>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> Vendor</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/vendor_sign_in" class="dropdown-item"> Vendor Sign in</a> </li>
-                    <li><a href="/vendor_sign_up" class="dropdown-item"> Vendor Sign up</a> </li>
-                  </ul>
-                </li>
-              </li>
-            <%end%>
-          </ul>
-        </nav>
-      </div>
-    </div>
-
-    <% if notice.present?%>
-      <div class="notice"><%= notice %></div>
-    <%end%>
-
-    <% if alert.present?%>
-      <div class="alert"><%= alert %></div>
-    <%end%>
-    <body>
-      <%= yield %>
-    </body>
-  </html>
+    <%= render "shared/nav" %>
+    <%= render "shared/flash" %>
+    <%= yield %>
+  </body>
+</html>
