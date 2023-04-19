@@ -1,7 +1,7 @@
 databases:
   - name: Deallio
     plan: free
-    databaseName: Deallio
+    databaseName: Dealliodb
     user: Deallio
 
 services:
